@@ -4,8 +4,9 @@ import LoginView from './views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import UserSelectionView from '@/views/UserSelectionView.vue';
 import DriverRegisterView from '@/views/DriverRegisterView.vue';
-import UserSearchView from '@/views/UserSearchView.vue';
 import MapSearchView from '@/views/MapSearchView.vue';
+import UserLocation from '@/views/UserLocation.vue';
+import WaitingForDriverView from '@/views/WaitingForDriverView.vue'
 
 const routes = [
   {
@@ -34,17 +35,24 @@ const routes = [
     name: 'driver-register',
     component: DriverRegisterView,
   },
-  {
-    path: '/user-search-view',
-    name: 'user-search-view',
-    component: UserSearchView,
-  },
 
   {
     path: '/map-search',
     name: 'map-search',
     component: MapSearchView,
   },
+
+  {
+    path: '/UserLocation',
+    name: 'UserLocation',
+    component: UserLocation,
+  },
+  {
+
+  path: '/waiting-for-driver',
+  name: 'WaitingForDriverView',
+  component: WaitingForDriverView
+},
 
   
   

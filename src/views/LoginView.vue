@@ -35,7 +35,7 @@ export default {
   methods: {
     handleSubmit() {
       console.log('Formulario enviado');
-      this.$router.push({ name: 'user-search-view' }); // Navega a UserSearchView
+      this.$router.push({ name: 'UserLocation' }); // Navega a UserLocation
     },
   },
 };

@@ -18,7 +18,7 @@
       if (option === 'conducir') {
         this.$router.push({ name: 'driver-register' });
       } else if (option === 'buscar-viaje') {
-        this.$router.push({ name: 'user-search-view' });
+        this.$router.push({ name: 'UserLocation' });
       }
     }
   }
