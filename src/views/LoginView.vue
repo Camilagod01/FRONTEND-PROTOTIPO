@@ -12,10 +12,6 @@
             <label for="phone">Número Telefónico</label>
             <input type="tel" id="phone" v-model="phone" />
           </div>
-          <div class="input-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" v-model="password" />
-          </div>
           <button type="submit">Inicia Sesión</button>
         </form>
       </div>
@@ -24,18 +20,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'LoginView',
   data() {
     return {
       phone: '',
-      password: '',
     };
   },
   methods: {
-    handleSubmit() {
-      console.log('Formulario enviado');
-      this.$router.push({ name: 'UserLocation' }); // Navega a UserLocation
+    async handleSubmit() {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/login', {
+          numero_telefonico: this.phone,
+        });
+        console.log('Código de verificación enviado:', response.data);
+        this.$router.push({ name: 'Verify' });
+      } catch (error) {
+        if (error.response) {
+          console.error('Error al enviar el código de verificación:', error.response.data);
+        } else {
+          console.error('Error al enviar el código de verificación:', error.message);
+        }
+      }
     },
   },
 };

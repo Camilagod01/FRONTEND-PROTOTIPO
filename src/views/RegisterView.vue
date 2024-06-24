@@ -9,20 +9,24 @@
         <h1>Crear Cuenta</h1>
         <form @submit.prevent="handleSubmit">
           <div class="input-group">
+            <label for="cedula">Cédula</label>
+            <input type="text" id="cedula" v-model="cedula" />
+          </div>
+          <div class="input-group">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" v-model="nombre" />
           </div>
           <div class="input-group">
-            <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" v-model="apellidos" />
+            <label for="apellido1">Primer apellido</label>
+            <input type="text" id="apellido1" v-model="apellido1" />
           </div>
           <div class="input-group">
-            <label for="telefono">Número Telefónico</label>
-            <input type="tel" id="telefono" v-model="telefono" />
+            <label for="apellido2">Segundo apellido</label>
+            <input type="text" id="apellido2" v-model="apellido2" />
           </div>
           <div class="input-group">
-            <label for="cedula">Cédula</label>
-            <input type="text" id="cedula" v-model="cedula" />
+            <label for="numero_telefonico">Número Telefónico</label>
+            <input type="tel" id="numero_telefonico" v-model="numero_telefonico" />
           </div>
           <button type="submit">Crear Cuenta</button>
         </form>
@@ -32,21 +36,38 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'RegisterView',
   data() {
     return {
-      nombre: '',
-      apellidos: '',
-      telefono: '',
       cedula: '',
+      nombre: '',
+      apellido1: '',
+      apellido2: '',
+      numero_telefonico: '',
     };
   },
   methods: {
-    handleSubmit() {
-      console.log('Formulario enviado', this.nombre, this.apellidos, this.telefono, this.cedula);
-      // Navigate to the user selection view
-      this.$router.push({ name: 'user-selection' });
+    async handleSubmit() {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/register', {
+          cedula: this.cedula,
+          nombre: this.nombre,
+          apellido1: this.apellido1,
+          apellido2: this.apellido2,
+          numero_telefonico: this.numero_telefonico,
+        });
+        console.log('Registrado con exito', response.data);
+        this.$router.push({ name: 'user-selection' });
+      } catch (error) {
+        if (error.response) {
+          console.error('Datos no validos', error.response.data);
+        } else {
+          console.error('Error al registrar', error.message);
+        }
+      }
     },
   },
 };
