@@ -2,7 +2,7 @@
     <div id="user-selection">
       <div class="selection-container">
         <img src="@/assets/LogoUver.png" alt="Logo Uver" class="logo" />
-        <h1>Regístrate para...</h1>
+        <h1>Seleccione una opcion</h1>
         <button @click="handleSelection('buscar-viaje')" class="btn selection">Buscar Viaje</button>
         <button @click="handleSelection('conducir')" class="btn selection">Conducir</button>
       </div>

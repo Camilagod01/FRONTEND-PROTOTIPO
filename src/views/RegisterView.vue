@@ -51,6 +51,11 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      if (!this.cedula || !this.nombre || !this.apellido1 || !this.apellido2 || !this.numero_telefonico) {
+        alert('No puede dejar espacios en blanco');
+        return;
+      }
+
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/register', {
           cedula: this.cedula,
@@ -59,13 +64,11 @@ export default {
           apellido2: this.apellido2,
           numero_telefonico: this.numero_telefonico,
         });
-        console.log('Registrado con exito', response.data);
+        alert('Registrado con éxito', response.data);
         this.$router.push({ name: 'user-selection' });
       } catch (error) {
         if (error.response) {
-          console.error('Datos no validos', error.response.data);
-        } else {
-          console.error('Error al registrar', error.message);
+          alert('Datos ingresados no validos', error.response.data);
         }
       }
     },
@@ -79,7 +82,7 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #e96443, #904e95);
+  background: linear-gradient(to right, #e96443, #4e4f95);
 }
 
 .register-container {

@@ -31,17 +31,19 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      if (!this.phone) {
+        alert("Debe ingresar un numero de telefono");
+        return;
+      }
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/login', {
           numero_telefonico: this.phone,
         });
-        console.log('Código de verificación enviado:', response.data);
+        alert('Código de verificación enviado:', response.data);
         this.$router.push({ name: 'Verify' });
       } catch (error) {
         if (error.response) {
-          console.error('Error al enviar el código de verificación:', error.response.data);
-        } else {
-          console.error('Error al enviar el código de verificación:', error.message);
+          alert('Error al enviar el codigo de verificacion', error.response.data);
         }
       }
     },

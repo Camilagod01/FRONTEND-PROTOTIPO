@@ -3,12 +3,10 @@
     <div id="user-search-view">
       <div class="search-container">
         <header>
-          <img src="@/assets/LogoUver.png" alt="Logo Uver" class="logo" />
-          <h1>Bienvenido Pedrito!</h1>
+          <img src="@/assets/LogoUver.png" alt="Logo Uver" class="location-logo" />
         </header>
         <div class="form-container">
           <div class="image-container" id="map-container">
-            <!-- Google Map will be rendered here -->
             <div id="map"></div>
           </div>
           <div class="form-content">
@@ -52,9 +50,9 @@ export default {
     return {
       address: '',
       destination: '',
-      map: null, // Store map instance
-      userMarker: null, // Store user marker instance
-      destinationMarker: null, // Store destination marker instance
+      map: null,
+      userMarker: null,
+      destinationMarker: null,
       directionsService: null,
       directionsRenderer: null,
       googleMapsLoaded: false
@@ -119,7 +117,7 @@ export default {
           map: this.map,
           suppressMarkers: true,
           polylineOptions: {
-            strokeColor: 'black', // Set the color to black
+            strokeColor: 'black',
             strokeOpacity: 1.0,
             strokeWeight: 3
           }
@@ -148,7 +146,7 @@ export default {
       }
     },
     getAddressFrom(lat, long) {
-      const apiKey = 'AIzaSyCTKEIyiVt5QGkOcoXGr452D49bKmF0wuY'; // Replace with your actual API key
+      const apiKey = 'AIzaSyCTKEIyiVt5QGkOcoXGr452D49bKmF0wuY';
       axios
         .get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`)
         .then(response => {
@@ -178,7 +176,6 @@ export default {
           });
         }
       } else {
-        // Create the map if it doesn't exist yet
         this.map = new google.maps.Map(document.getElementById("map"), {
           zoom: 15,
           center: new google.maps.LatLng(latitude, longitude),
@@ -223,6 +220,10 @@ export default {
       }
     },
     handleSubmit() {
+      if (!this.address || !this.destination) {
+        alert('Debe seleccionar un lugar de origen y uno de destino');
+        return;
+      }
   console.log('Journey search submitted', this.address, this.destination);
   this.$router.push({
     name: 'map-search',
@@ -238,8 +239,6 @@ export default {
     }
   });
 }
-
-
   }
 };
 </script>
@@ -355,5 +354,12 @@ button:hover {
 
 .pac-item:hover {
   background-color: #aaaaaa;
+}
+
+.location-logo {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;    /* Centrar verticalmente */
+  height: 5vh;          /* Ajusta la altura según sea necesario */
 }
 </style>

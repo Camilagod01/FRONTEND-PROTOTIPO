@@ -1,9 +1,6 @@
 <template>
   <div id="verify">
-    <div class="login-container">
-      <div class="image-container">
-        <img src="@/assets/imagen-carro.png" alt="Viaje en coche" />
-      </div>
+    <div class="verify-container">
       <div class="form-container">
         <img src="@/assets/LogoUver.png" alt="Logo Uver" />
         <h1>Verificación</h1>
@@ -33,17 +30,19 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      if (!this.code) {
+        alert("El campo de codigo no puede estar en blanco");
+        return;
+      }
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/verify', {
           verification_code: this.code,
         });
-        console.log('Código verificado con éxito:', response.data);
-        this.$router.push({ name: 'Home' });
+        alert('Código verificado con éxito', response.data);
+        this.$router.push({ name: '/user-selection' });
       } catch (error) {
         if (error.response) {
-          console.error('Error al verificar el código:', error.response.data);
-        } else {
-          console.error('Error al verificar el código:', error.message);
+          alert('Error al verificar el codigo', error.response.data);
         }
       }
     },
@@ -52,7 +51,7 @@ export default {
 </script>
   
   <style scoped>
-  #login {
+  #verify {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,13 +59,13 @@ export default {
     background: linear-gradient(to right, #d48f7e, #7a4d7e);
   }
   
-  .login-container {
+  .verify-container {
     display: flex;
     width: 80%;
-    max-width: 1000px;
+    max-width: 400px;
     background-color: #ffffff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 50px;
     overflow: hidden;
   }
   
@@ -85,11 +84,13 @@ export default {
   }
   
   .form-container {
-    width: 50%;
+    width: 80%;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+    margin: auto;
   }
   
   .logo {
