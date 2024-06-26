@@ -39,11 +39,11 @@ export default {
         const response = await axios.post('http://127.0.0.1:8000/api/login', {
           numero_telefonico: this.phone,
         });
-        alert('Código de verificación enviado:', response.data);
+        alert('Código de verificación enviado', response.data);
         this.$router.push({ name: 'Verify' });
       } catch (error) {
         if (error.response) {
-          alert('Error al enviar el codigo de verificacion', error.response.data);
+          alert('Error al enviar el codigo de verificacion, ingrese un numero telefonico valido', error.response.data);
         }
       }
     },

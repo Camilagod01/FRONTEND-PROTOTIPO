@@ -19,8 +19,6 @@
 <script>
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-
 export default {
   name: 'VerifyView',
   data() {
@@ -31,7 +29,7 @@ export default {
   methods: {
     async handleSubmit() {
       if (!this.code) {
-        alert("El campo de codigo no puede estar en blanco");
+        alert("El campo de código no puede estar en blanco");
         return;
       }
       try {
@@ -39,10 +37,10 @@ export default {
           verification_code: this.code,
         });
         alert('Código verificado con éxito', response.data);
-        this.$router.push({ name: '/user-selection' });
+        this.$router.push({ name: 'user-selection' });
       } catch (error) {
         if (error.response) {
-          alert('Error al verificar el codigo', error.response.data);
+          alert('Codigo de verificacion invalido', error.response.data);
         }
       }
     },
