@@ -39,8 +39,12 @@
     },
     methods: {
       handleSubmit() {
-        console.log('Driver form submitted', this.placa, this.marca, this.modelo, this.color);
-        // Handle the driver registration logic here
+        if (!this.placa | !this.marca | !this.modelo | !this.color) {
+          alert('Debe ingresar todos los datos solicitados');
+          return;
+        }
+        //alert('Registro de vehiculo exitoso', this.placa, this.marca, this.modelo, this.color);
+        this.$router.push({ name: 'WaitingForPassengerView' });
       },
     },
   };

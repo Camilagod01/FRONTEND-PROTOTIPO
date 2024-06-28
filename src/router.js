@@ -8,6 +8,7 @@ import DriverRegisterView from '@/views/DriverRegisterView.vue';
 import MapSearchView from '@/views/MapSearchView.vue';
 import UserLocation from '@/views/UserLocation.vue';
 import WaitingForDriverView from '@/views/WaitingForDriverView.vue'
+import WaitingForPassengerView from '@/views/WaitingForPassengerView.vue'
 
 const routes = [
   {
@@ -59,6 +60,14 @@ const routes = [
   name: 'WaitingForDriverView',
   component: WaitingForDriverView
 },
+
+{
+
+  path: '/waiting-for-passenger',
+  name: 'WaitingForPassengerView',
+  component: WaitingForPassengerView
+},
+
 
   
   
